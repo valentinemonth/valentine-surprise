@@ -120,4 +120,74 @@ noBtn.addEventListener("click", function() {
     alert("Pooja... are you absolutely sure? 😏");
   } 
   else if (noClickCount === 2) {
-    alert("Destiny
+    alert("Destiny is strongly suggesting YES 😌💖");
+    card.classList.add("shake");
+    noBtn.style.display = "none";
+    startCountdown();
+  }
+});
+
+// Countdown (no automatic yes)
+function startCountdown() {
+  let count = 3;
+  countdownEl.innerText = count;
+
+  const interval = setInterval(function() {
+    count--;
+
+    if (count > 0) {
+      countdownEl.innerText = count;
+    } else {
+      clearInterval(interval);
+      countdownEl.innerText = "Your move ❤️";
+    }
+
+  }, 1000);
+}
+
+// Floating hearts
+function createHearts() {
+  setInterval(function() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(function() {
+      heart.remove();
+    }, 7000);
+
+  }, 300);
+}
+
+// YES click — reliable music start
+yesBtn.addEventListener("click", function() {
+
+  music.currentTime = 0;
+  music.play().catch(function(){});
+
+  card.innerHTML = `
+    <div class="final">
+      <h1>Pooja 💖</h1>
+      <h2>You are my forever 😍</h2>
+      <p style="font-size:20px; max-width:600px;">
+        You are my safest place,
+        my best decision,
+        my favorite smile,
+        and my greatest blessing.<br><br>
+        I would choose you again and again,
+        in every lifetime,
+        in every universe. 💕
+      </p>
+      <h3>Forever yours,<br>Anishek 😘</h3>
+    </div>
+  `;
+
+  createHearts();
+});
+</script>
+
+</body>
+</html>
