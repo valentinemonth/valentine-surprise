@@ -19,8 +19,11 @@ body {
 
 /* Background after YES */
 .love-bg {
-  background: url('background.JPG') no-repeat center center fixed;
+  background-image: url('./background.JPG'); /* MUST match GitHub filename exactly */
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .card {
@@ -31,6 +34,7 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   position: relative;
   z-index: 2;
+  transition: 1s;
 }
 
 button {
@@ -82,7 +86,7 @@ button {
   animation: fadeIn 2s ease-in forwards;
   opacity: 0;
   color: white;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
 @keyframes fadeIn {
@@ -120,7 +124,7 @@ const countdownEl = document.getElementById("countdown");
 let noClickCount = 0;
 let yesSize = 1;
 
-// Only 2 No tries
+// NO button logic
 noBtn.addEventListener("click", function() {
 
   noClickCount++;
@@ -176,16 +180,18 @@ function createHearts() {
 // YES click
 yesBtn.addEventListener("click", function() {
 
+  // Play music
   music.currentTime = 0;
   music.play().catch(function(){});
 
   // Change background
   document.body.classList.add("love-bg");
 
-  // Remove white card background
+  // Make card transparent
   card.style.background = "transparent";
   card.style.boxShadow = "none";
 
+  // Replace content
   card.innerHTML = `
     <div class="final">
       <h1>Pooja 💖</h1>
