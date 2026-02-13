@@ -14,6 +14,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 1.5s ease-in-out;
+}
+
+/* Background after YES */
+.love-bg {
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 .card {
@@ -23,6 +30,7 @@ body {
   text-align: center;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   position: relative;
+  z-index: 2;
 }
 
 button {
@@ -62,6 +70,7 @@ button {
   font-size: 24px;
   animation: floatUp 6s linear infinite;
   pointer-events: none;
+  z-index: 1;
 }
 
 @keyframes floatUp {
@@ -72,6 +81,8 @@ button {
 .final {
   animation: fadeIn 2s ease-in forwards;
   opacity: 0;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
 }
 
 @keyframes fadeIn {
@@ -127,7 +138,7 @@ noBtn.addEventListener("click", function() {
   }
 });
 
-// Countdown (no automatic yes)
+// Countdown
 function startCountdown() {
   let count = 3;
   countdownEl.innerText = count;
@@ -162,11 +173,18 @@ function createHearts() {
   }, 300);
 }
 
-// YES click — reliable music start
+// YES click
 yesBtn.addEventListener("click", function() {
 
   music.currentTime = 0;
   music.play().catch(function(){});
+
+  // Change background
+  document.body.classList.add("love-bg");
+
+  // Remove white card background
+  card.style.background = "transparent";
+  card.style.boxShadow = "none";
 
   card.innerHTML = `
     <div class="final">
